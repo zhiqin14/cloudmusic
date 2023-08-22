@@ -1,12 +1,12 @@
 # *-* coding = 'utf-8' *-* #
 import requests
-import base64
 import sys
+import os
+from time import sleep
 from var_config import var_config
+from save_img import save_img
 from ui_cloudmusic import Ui_CloudMusic
 from PySide2.QtWidgets import QApplication, QMainWindow
-from PySide2.QtGui import QPixmap, QImage
-from PySide2.QtCore import QByteArray
 
 const = var_config()
 
@@ -31,18 +31,15 @@ class CloudMusic(QMainWindow, Ui_CloudMusic):
         key = requests.get(const.api_url+const.key_generate, headers=self.headers).json()['data']['unikey']
         print(key)
         qr_base64 = requests.get(const.api_url+const.qr_generate+f'?key={key}&qrimg="base64"', headers=self.headers).json()['data']['qrimg'].split(',')[1]
-        qr_imgdata = base64.b64decode(qr_base64)
-        qr_array = QByteArray(qr_imgdata)
-        qr_img = QImage.fromData(qr_array)
-        qr_pixmap = QPixmap.fromImage(qr_img)
-        self.qrcode.setPixmap(qr_pixmap)
+        save_img(qr_base64).save('qr.png', self.qrcode)
         scan_result = requests.get(const.api_url+const.qr_scan_status+f'key={key}').json()
         while scan_result['code'] != 803:
             if scan_result['code'] == 800:
-                self.loginStatus.setText('二维码过期了捏，重新登录叭')
+                self.loginStatus.setText('二维码过期了捏，重新登录吧')
             elif scan_result['code'] == 802:
                 self.loginStatus.setText('扫码成功！')
             scan_result = requests.get(const.api_url+const.qr_scan_status+f'key={key}').json()
+            sleep(3)
         with open('cookie.txt', 'w', encoding='utf-8') as file:
             file.write(scan_result['cookie'])
         self.loginStatus.setText('成功了捏')

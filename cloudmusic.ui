@@ -75,7 +75,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>二维码将显示在这里</string>
+       <string>Waiting...</string>
       </property>
      </widget>
     </widget>

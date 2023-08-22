@@ -60,7 +60,7 @@ class Ui_CloudMusic(object):
         CloudMusic.setWindowTitle(QCoreApplication.translate("CloudMusic", u"CloudMusic", None))
         self.loginStatus.setText(QCoreApplication.translate("CloudMusic", u"\u4f60\u8fd8\u6ca1\u6709\u767b\u5f55\u90a3\uff01\u8d76\u5feb\u53bb\u767b\u5f55\u53ed\uff01", None))
         self.loginButton.setText(QCoreApplication.translate("CloudMusic", u"\u767b\u5f55\uff01", None))
-        self.qrcode.setText(QCoreApplication.translate("CloudMusic", u"\u4e8c\u7ef4\u7801\u5c06\u663e\u793a\u5728\u8fd9\u91cc", None))
+        self.qrcode.setText(QCoreApplication.translate("CloudMusic", u"Waiting...", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.login), QCoreApplication.translate("CloudMusic", u"\u767b\u5f55", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("CloudMusic", u"\u4e2a\u4eba\u4fe1\u606f", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.playlist), QCoreApplication.translate("CloudMusic", u"\u6b4c\u5355", None))
